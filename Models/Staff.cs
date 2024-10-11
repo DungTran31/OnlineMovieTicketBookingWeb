@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineMovieTicketBookingWeb.Models
 {
-    public class Staff : IdentityUser
+    public class Staff : AppUser
     {
         public Staff()
         {
@@ -33,10 +33,6 @@ namespace OnlineMovieTicketBookingWeb.Models
         [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
         [Display(Name = "Email")]
         public string? Email { get; set; }
-
-        [StringLength(255, ErrorMessage = "Địa chỉ không được vượt quá 255 ký tự")]
-        [Display(Name = "Địa chỉ")]
-        public string? Address { get; set; }
 
         [Required(ErrorMessage = "Ngày tuyển dụng không được để trống")]
         [Display(Name = "Ngày tuyển dụng")]

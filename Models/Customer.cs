@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineMovieTicketBookingWeb.Models
 {
-    public class Customer : IdentityUser
+    public class Customer : AppUser
     {
         public Customer()
         {
@@ -34,17 +34,10 @@ namespace OnlineMovieTicketBookingWeb.Models
         [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
         public string Email { get; set; }
 
-        [Display(Name = "Địa chỉ")]
-        [StringLength(255, ErrorMessage = "Địa chỉ không được vượt quá 255 ký tự")]
-        public string? Address { get; set; }
 
         [Display(Name = "Ngày đăng ký")]
         [DataType(DataType.Date, ErrorMessage = "Ngày đăng ký không hợp lệ")]
         public DateTime RegistrationDate { get; set; }
-
-        [Display(Name = "Ngày sinh")]
-        [DataType(DataType.Date, ErrorMessage = "Ngày sinh không hợp lệ")]
-        public DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Giới tính")]
         [StringLength(10, ErrorMessage = "Giới tính không được vượt quá 10 ký tự")]

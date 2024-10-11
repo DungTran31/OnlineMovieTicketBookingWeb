@@ -31,8 +31,6 @@ namespace OnlineMovieTicketBookingWeb.Areas.Database.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteDbAsync()
         {
-
-
             var success = await db.Database.EnsureDeletedAsync();
 
             StatusMessage = success ? "Xóa Database thành công" : "Không xóa được Database";

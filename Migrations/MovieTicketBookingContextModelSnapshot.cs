@@ -508,6 +508,9 @@ namespace OnlineMovieTicketBookingWeb.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100)

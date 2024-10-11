@@ -40,7 +40,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Database\Models\" />
+    <Folder Include="Areas\Database\Data\" />
+    <Folder Include="Areas\Identity\Data\" />
     <Folder Include="ViewComponents\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Database\Views\DbManage\DeleteDb.cshtml" />
+    <None Include="Areas\Database\Views\DbManage\Index.cshtml" />
+    <None Include="Areas\Database\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Database\Views\_ViewStart.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_MenuManagePartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
 
 </Project>
