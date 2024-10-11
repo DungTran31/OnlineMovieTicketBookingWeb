@@ -41,7 +41,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
         // GET: /Account/Login
         [HttpGet("/login/")]
         [AllowAnonymous]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login(string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
@@ -52,7 +52,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
         [HttpPost("/login/")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ViewData["ReturnUrl"] = returnUrl;
@@ -107,7 +107,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        public IActionResult Register(string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ViewData["ReturnUrl"] = returnUrl;
@@ -118,7 +118,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, string? returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ViewData["ReturnUrl"] = returnUrl;
@@ -146,7 +146,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
 
                     await _emailSender.SendEmailAsync(model.Email, 
                         "Xác nhận địa chỉ email",
-                        @$"Bạn đã đăng ký tài khoản trên RazorWeb, 
+                        @$"Bạn đã đăng ký tài khoản trên MovieTicketBookingWeb, 
                            hãy <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>bấm vào đây</a> 
                            để kích hoạt tài khoản.");
 

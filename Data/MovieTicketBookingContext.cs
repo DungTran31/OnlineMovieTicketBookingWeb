@@ -5,7 +5,7 @@ using OnlineMovieTicketBookingWeb.Models;
 
 namespace OnlineMovieTicketBookingWeb.Data
 {
-    public class MovieTicketBookingContext : IdentityDbContext<IdentityUser, IdentityRole, string>
+    public class MovieTicketBookingContext : IdentityDbContext<AppUser>
     {
         public MovieTicketBookingContext(DbContextOptions<MovieTicketBookingContext> options) : base(options) { }
 
@@ -24,8 +24,6 @@ namespace OnlineMovieTicketBookingWeb.Data
         {
             base.OnModelCreating(modelBuilder);
 
-           
-
             // Define composite keys for Identity-related tables
             modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
             {
@@ -43,7 +41,7 @@ namespace OnlineMovieTicketBookingWeb.Data
             });
 
             // Map Identity tables to custom table names (optional)
-            modelBuilder.Entity<IdentityUser>().ToTable("Users");
+            modelBuilder.Entity<AppUser>().ToTable("Users");
             modelBuilder.Entity<IdentityRole>().ToTable("Roles");
             modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
@@ -60,30 +58,31 @@ namespace OnlineMovieTicketBookingWeb.Data
                 .HasOne(st => st.Seat)
                 .WithMany(s => s.SoldTickets)
                 .HasForeignKey(st => st.SeatId)
-                .OnDelete(DeleteBehavior.ClientSetNull); // Ngăn chặn xóa cascade
+                .OnDelete(DeleteBehavior.ClientSetNull); // Prevent cascade delete
 
             modelBuilder.Entity<SoldTicket>()
                 .HasOne(st => st.Screening)
                 .WithMany(s => s.SoldTickets)
                 .HasForeignKey(st => st.ScreeningId)
-                .OnDelete(DeleteBehavior.ClientSetNull); // Ngăn chặn xóa cascade
+                .OnDelete(DeleteBehavior.ClientSetNull); // Prevent cascade delete
 
             modelBuilder.Entity<SoldTicket>()
                 .HasOne(st => st.TicketPrice)
                 .WithMany(tp => tp.SoldTickets)
                 .HasForeignKey(st => st.TicketPriceId)
-                .OnDelete(DeleteBehavior.ClientSetNull); // Ngăn chặn xóa cascade
+                .OnDelete(DeleteBehavior.ClientSetNull); // Prevent cascade delete
 
             modelBuilder.Entity<SoldTicket>()
                 .HasOne(st => st.Staff)
                 .WithMany(s => s.SoldTickets)
                 .HasForeignKey(st => st.StaffId)
-                .OnDelete(DeleteBehavior.ClientSetNull); // Ngăn chặn xóa cascade
+                .OnDelete(DeleteBehavior.ClientSetNull); // Prevent cascade delete
+
             modelBuilder.Entity<BookedTicket>(entity =>
             {
                 entity.HasKey(e => new { e.SoldTicketId, e.CustomerId });
-
             });
+
             modelBuilder.Entity<Seat>().ToTable(nameof(Seat));
             modelBuilder.Entity<Movie>().ToTable(nameof(Movie));
             modelBuilder.Entity<Screening>().ToTable(nameof(Screening));
