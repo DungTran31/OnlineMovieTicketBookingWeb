@@ -7,13 +7,9 @@ namespace OnlineMovieTicketBookingWeb.Models
     {
         public Staff()
         {
+            Id = Guid.NewGuid().ToString();
             SoldTickets = new HashSet<SoldTicket>();
         }
-
-        [Key]
-        [StringLength(50)]
-        [Display(Name = "Mã Nhân Viên")]
-        public string? Id { get; set; }
 
         [Required(ErrorMessage = "Họ và tên không được để trống")]
         [StringLength(100, ErrorMessage = "Họ và tên không được vượt quá 100 ký tự")]
@@ -27,12 +23,12 @@ namespace OnlineMovieTicketBookingWeb.Models
 
         [StringLength(15, ErrorMessage = "Số điện thoại không được vượt quá 15 ký tự")]
         [Display(Name = "Số điện thoại")]
-        public string? PhoneNumber { get; set; }
+        public new string? PhoneNumber { get; set; }
 
         [StringLength(100)]
         [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
         [Display(Name = "Email")]
-        public string? Email { get; set; }
+        public new string? Email { get; set; }
 
         [Required(ErrorMessage = "Ngày tuyển dụng không được để trống")]
         [Display(Name = "Ngày tuyển dụng")]
@@ -44,7 +40,7 @@ namespace OnlineMovieTicketBookingWeb.Models
 
         [StringLength(10, ErrorMessage = "Trạng thái không được vượt quá 10 ký tự")]
         [Display(Name = "Trạng thái hoạt động")]
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
 
         [StringLength(50, ErrorMessage = "Vai trò không được vượt quá 50 ký tự")]
         [Display(Name = "Vai trò")]

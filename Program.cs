@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineMovieTicketBookingWeb.Data;
 using OnlineMovieTicketBookingWeb.Models;
+using OnlineMovieTicketBookingWeb.Services;
 using System.Configuration;
 
 namespace OnlineMovieTicketBookingWeb
@@ -95,6 +96,8 @@ namespace OnlineMovieTicketBookingWeb
             // .AddTwitter()
             // .AddMicrosoftAccount()
 
+            builder.Services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -120,7 +123,7 @@ namespace OnlineMovieTicketBookingWeb
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseStatusCodePagesWithRedirects("/Home/NotFound");
+            //app.UseStatusCodePagesWithRedirects("/Home/NotFound");
 
             app.MapControllerRoute(
                 name: "default",

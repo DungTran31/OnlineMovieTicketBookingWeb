@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using OnlineMovieTicketBookingWeb.Models
+@model IEnumerable<Customer>
+
+<div class="ms-2 mx-2">
+    <partial name="_AlertMessage" />
+    <h1>Customer List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.FullName</td>
+                    <td>@c.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                    <td>
+                        <a asp-controller="Customer" asp-action="Details" asp-route-id="@c.Id" class="btn btn-info">Chi tiết</a>
+                        <a asp-controller="Customer" asp-action="Edit" asp-route-id="@c.Id" class="btn btn-warning">Sửa</a>
+                        <a asp-controller="Customer" asp-action="Delete" asp-route-id="@c.Id" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Customer" asp-action="Create" class="btn btn-primary">Tạo nhân viên mới</a>
+</div>

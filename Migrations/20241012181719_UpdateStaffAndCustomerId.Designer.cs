@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineMovieTicketBookingWeb.Data;
 
@@ -11,9 +12,11 @@ using OnlineMovieTicketBookingWeb.Data;
 namespace OnlineMovieTicketBookingWeb.Migrations
 {
     [DbContext(typeof(MovieTicketBookingContext))]
-    partial class MovieTicketBookingContextModelSnapshot : ModelSnapshot
+    [Migration("20241012181719_UpdateStaffAndCustomerId")]
+    partial class UpdateStaffAndCustomerId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,10 +176,6 @@ namespace OnlineMovieTicketBookingWeb.Migrations
 
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Discriminator")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)

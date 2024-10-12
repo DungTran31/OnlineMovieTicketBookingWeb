@@ -40,7 +40,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
 
         // GET: /Account/Login
         [HttpGet("/login/")]
-        [AllowAnonymous]
+        [AllowAnonymous] // để xác nhận quyền người dùng không đăng nhập vẫn được quyền truy cập Page đó.
         public IActionResult Login(string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;

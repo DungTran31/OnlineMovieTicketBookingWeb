@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<Staff>
+
+<div class="ms-2 mx-2">
+    <partial name="_AlertMessage" />
+    <h1>Customer List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Đang hoạt động</th>
+                <th>Id</th>
+                <th>Chức năng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in Model)
+            {
+                <tr>
+                    <td>@s.FullName</td>
+                    <td>@s.DateOfBirth.ToString("dd-MM-yyyy")</td>
+                    <td>@s.IsActive</td>
+                    <td>@s.Id</td>
+                    <td>
+                        <a asp-controller="Staff" asp-action="Details" asp-route-id="@s.Id" class="btn btn-info">Chi tiết</a>
+                        <a asp-controller="Staff" asp-action="Edit" asp-route-id="@s.Id" class="btn btn-warning">Sửa</a>
+                        <a asp-controller="Staff" asp-action="Delete" asp-route-id="@s.Id" class="btn btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Staff" asp-action="Create" class="btn btn-primary">Tạo nhân viên mới</a>
+</div>

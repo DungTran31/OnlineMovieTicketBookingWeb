@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model OnlineMovieTicketBookingWeb.Models.Customer
+<div class="ms-2 mx-2">
+    <h1>Edit</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <form asp-controller="Contact" asp-action="Edit" asp-route-id="@Model.Id" method="post" class="mt-3">
+        <input type="hidden" asp-for="Id" />
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="FullName" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="FullName" class="form-control" placeholder="FullName">
+            </div>
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="IdentityNumber" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="IdentityNumber" class="form-control" placeholder="IdentityNumber">
+            </div>
+            <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="RegistrationDate" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="RegistrationDate" class="form-control">
+            </div>
+            <span asp-validation-for="RegistrationDate" class="text-danger"></span>
+        </div>
+
+        <div style="margin-top:7px" class="form-group row">
+            <label asp-for="Gender" class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-10">
+                <input asp-for="Gender" class="form-control" placeholder="Gender">
+            </div>
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+
+        <div style="margin-top:10px" class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </form>
+</div>
+

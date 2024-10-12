@@ -7,13 +7,9 @@ namespace OnlineMovieTicketBookingWeb.Models
     {
         public Customer()
         {
+            Id = Guid.NewGuid().ToString();
             BookedTickets = new HashSet<BookedTicket>();
         }
-
-        [Key]
-        [Display(Name = "Mã khách hàng")]
-        [Required(ErrorMessage = "Mã khách hàng không được để trống")]
-        public string? Id { get; set; }
 
         [Display(Name = "Họ và tên")]
         [Required(ErrorMessage = "Họ và tên không được để trống")]
@@ -27,12 +23,12 @@ namespace OnlineMovieTicketBookingWeb.Models
 
         [Display(Name = "Số điện thoại")]
         [StringLength(15, ErrorMessage = "Số điện thoại không được vượt quá 15 ký tự")]
-        public string? PhoneNumber { get; set; }
+        public new string? PhoneNumber { get; set; }
 
         [Display(Name = "Email")]
         [StringLength(100, ErrorMessage = "Email không được vượt quá 100 ký tự")]
         [EmailAddress(ErrorMessage = "Địa chỉ email không hợp lệ")]
-        public string Email { get; set; }
+        public new string? Email { get; set; }
 
 
         [Display(Name = "Ngày đăng ký")]
