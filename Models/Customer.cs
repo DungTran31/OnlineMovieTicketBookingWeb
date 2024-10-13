@@ -33,7 +33,7 @@ namespace OnlineMovieTicketBookingWeb.Models
 
         [Display(Name = "Ngày đăng ký")]
         [DataType(DataType.Date, ErrorMessage = "Ngày đăng ký không hợp lệ")]
-        public DateTime RegistrationDate { get; set; }
+        public DateTime? RegistrationDate { get; set; }
 
         [Display(Name = "Giới tính")]
         [StringLength(10, ErrorMessage = "Giới tính không được vượt quá 10 ký tự")]

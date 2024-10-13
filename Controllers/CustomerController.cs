@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 namespace OnlineMovieTicketBookingWeb.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class ContactController : Controller
+    public class CustomerController : Controller
     {
         private readonly MovieTicketBookingContext _context;
 
         [TempData]
         public string StatusMessage { get; set; } = string.Empty;
 
-        public ContactController(MovieTicketBookingContext context)
+        public CustomerController(MovieTicketBookingContext context)
         {
             _context = context;
         }

@@ -32,7 +32,7 @@ namespace OnlineMovieTicketBookingWeb.Models
 
         [Required(ErrorMessage = "Ngày tuyển dụng không được để trống")]
         [Display(Name = "Ngày tuyển dụng")]
-        public DateTime HireDate { get; set; }
+        public DateTime? HireDate { get; set; }
 
         [StringLength(10, ErrorMessage = "Giới tính không được vượt quá 10 ký tự")]
         [Display(Name = "Giới tính")]

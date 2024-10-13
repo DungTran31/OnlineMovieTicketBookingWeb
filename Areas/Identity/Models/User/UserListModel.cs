@@ -12,13 +12,13 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Models.UserViewModels
 
             public int currentPage { get; set; }
 
-            public List<UserAndRole> users { get; set; }
+            public List<UserAndRole>? users { get; set; }
 
         }
 
         public class UserAndRole : AppUser
         {
-            public string RoleNames { get; set; }
+            public string? RoleNames { get; set; }
         }
 
 

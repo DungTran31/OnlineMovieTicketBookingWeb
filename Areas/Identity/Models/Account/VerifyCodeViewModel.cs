@@ -8,12 +8,12 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Models.AccountViewModels
     public class VerifyCodeViewModel
     {
         [Required]
-        public string Provider { get; set; }
+        public string? Provider { get; set; }
 
         [Required]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
 
         [Display(Name = "Nhớ cho trình duyệt này?")]
         public bool RememberBrowser { get; set; }

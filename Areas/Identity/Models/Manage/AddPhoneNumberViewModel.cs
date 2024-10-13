@@ -14,6 +14,6 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Models.ManageViewModels
         [Required]
         [Phone]
         [Display(Name = "Số điện thoại")]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OnlineMovieTicketBookingWeb.Data;
@@ -85,16 +85,21 @@ namespace OnlineMovieTicketBookingWeb
                     options.ClientId = gconfig["ClientId"] ?? throw new InvalidOperationException("Google ClientId is not configured.");
                     options.ClientSecret = gconfig["ClientSecret"] ?? throw new InvalidOperationException("Google ClientSecret is not configured.");
                     options.CallbackPath = "/dang-nhap-tu-google";
-                })
-                .AddFacebook(options =>
-                {
-                    var fconfig = builder.Configuration.GetSection("Authentication:Facebook");
-                    options.AppId = fconfig["AppId"] ?? throw new InvalidOperationException("Facebook AppId is not configured.");
-                    options.AppSecret = fconfig["AppSecret"] ?? throw new InvalidOperationException("Facebook AppSecret is not configured.");
-                    options.CallbackPath = "/dang-nhap-tu-facebook";
                 });
+                //.AddFacebook(options =>
+                //{
+                //    var fconfig = builder.Configuration.GetSection("Authentication:Facebook");
+                //    options.AppId = fconfig["AppId"] ?? throw new InvalidOperationException("Facebook AppId is not configured.");
+                //    options.AppSecret = fconfig["AppSecret"] ?? throw new InvalidOperationException("Facebook AppSecret is not configured.");
+                //    options.CallbackPath = "/dang-nhap-tu-facebook";
+                //});
             // .AddTwitter()
             // .AddMicrosoftAccount()
+
+            builder.Services.AddAuthorization(Services =>
+            {
+                Services.AddPolicy("ViewManageMenu", policy => policy.RequireAuthenticatedUser().RequireRole(RoleName.Administrator));
+            });
 
             builder.Services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
 

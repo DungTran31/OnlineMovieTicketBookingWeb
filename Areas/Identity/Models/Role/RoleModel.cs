@@ -12,7 +12,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Models.RoleViewModels
 {
     public class RoleModel : IdentityRole
     {
-        public string[] Claims { get; set; }
+        public string[]? Claims { get; set; }
 
     }
 }
