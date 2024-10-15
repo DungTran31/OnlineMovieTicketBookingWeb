@@ -4,15 +4,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
     <title>DMHTB Cinema</title>
+    <link rel="stylesheet" href="~/css/styles.css"/>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/OnlineMovieTicketBookingWeb.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/multiple-select/multiple-select.min.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/logofavicon.ico" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="~/logofavicon.ico" />
 </head>
 <body class="sb-nav-fixed" style="background:linear-gradient(168.44deg, #2e335a, #1c1b33)">
     <!-- Begin Top nav -->
@@ -32,20 +32,19 @@
             </main>
             <!-- End Main -->
             <!-- Begin Footer -->
-            <footer class="py-2  mt-auto text-white" style="background-color: black;">
+            <footer class="py-2 mt-auto text-white" style="background-color: black;">
                 <partial name="Footer"></partial>
             </footer>
             <!-- End Footer -->
         </div>
         <!-- End Right content -->
     </div>
+    <script src="~/js/scripts.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/scripts.js"></script>
+    <script src="~/lib/multiple-select/multiple-select.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="~/lib/multiple-select/multiple-select.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

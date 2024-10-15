@@ -1,11 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
 @inject IAuthorizationService authorizationService
 
 @{
     var result = await authorizationService.AuthorizeAsync(User, "ViewManageMenu");
 }
 
-@if (result.Succeeded)
+@if (SignInManager.IsSignedIn(User) && result.Succeeded)
 {
     <div class="dropdown">
         <a class="btn btn-outline-danger dropdown-toggle" href="#"

@@ -43,7 +43,6 @@
     <Folder Include="Areas\Database\Models\" />
     <Folder Include="Areas\Database\Data\" />
     <Folder Include="Areas\Identity\Data\" />
-    <Folder Include="ViewComponents\" />
   </ItemGroup>
 
   <ItemGroup>

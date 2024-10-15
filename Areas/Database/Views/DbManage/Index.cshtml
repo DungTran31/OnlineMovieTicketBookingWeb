@@ -5,7 +5,7 @@
 
 @{
     ViewData["Title"] = "Thông tin Database";
-    Layout = "/Views/Shared/_Layout.cshtml";
+    Layout = "/Views/Shared/_MyLayout.cshtml";
     var connect = dbContext.Database.GetDbConnection();
     var dbname = connect.Database;
     var can_connect = dbContext.Database.CanConnect();
