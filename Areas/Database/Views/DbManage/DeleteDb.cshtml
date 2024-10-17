@@ -3,17 +3,17 @@
     Layout = "/Views/Shared/_MyLayout.cshtml";
 }
 
-<h1>@ViewData["Title"]</h1>
-<p class="alert alert-danger">
+<h1 class="ms-2 mx-2">@ViewData["Title"]</h1>
+<p class="alert alert-danger ms-2 mx-2">
     Có chắc chắn xóa?
 </p>
 
 <form method="post">
-    <button type="submit" class="btn btn-danger">
+    <button type="submit" class="btn btn-danger ms-2 mx-2">
         Xóa Db
     </button>
 
     <hr>
-    <a asp-action="Index">Quản lý Db</a>
+    <a class="ms-2 mx-2" asp-action="Index">Quản lý Db</a>
 </form>
 

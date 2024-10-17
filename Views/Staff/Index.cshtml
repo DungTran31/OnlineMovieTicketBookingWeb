@@ -4,10 +4,10 @@
 }
 @model IEnumerable<Staff>
 
-<div class="ms-2 mx-2">
+<div class="" style="margin-left: 0; margin-right: 0;">
     <partial name="_AlertMessage" />
-    <h1>Customer List</h1>
-    <table class="table table-striped">
+    <h1 class="ms-2 mx-2">Staff List</h1>
+    <table class="table text-light">
         <thead>
             <tr>
                 <th>Họ và tên</th>
@@ -34,5 +34,5 @@
             }
         </tbody>
     </table>
-    <a asp-controller="Staff" asp-action="Create" class="btn btn-primary">Tạo nhân viên mới</a>
+    <a asp-controller="Staff" asp-action="Create" class="btn btn-primary ms-2 mx-2" style="margin-bottom:10px">Tạo nhân viên mới</a>
 </div>

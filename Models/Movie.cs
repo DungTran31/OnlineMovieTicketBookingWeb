@@ -63,6 +63,10 @@ namespace OnlineMovieTicketBookingWeb.Models
         [StringLength(100, ErrorMessage = "Thể loại phim không được vượt quá 100 ký tự")]
         public string? MovieGenre { get; set; }
 
+        [Display(Name = "Poster")]
+        [StringLength(255, ErrorMessage = "URL của poster không được vượt quá 255 ký tự")]
+        public string? Poster { get; set; }
+
         public ICollection<Screening> Screenings { get; set; }
     }
 }

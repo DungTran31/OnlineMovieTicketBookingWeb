@@ -12,36 +12,38 @@
 }
 
 <partial name="_AlertMessage" />
+<div class="ms-2 mx-2">
+    <h2>Thông tin</h2>
+    <p>- Database: @dbname</p>
+    <p>- Source: @connect.DataSource</p>
+    <p>- State: @connect.State</p>
+    <hr>
+</div>
 
-<h2>Thông tin</h2>
-<p>- Database: @dbname</p>
-<p>- Source: @connect.DataSource</p>
-<p>- State: @connect.State</p>
-<hr>
-<h2>Migrations</h2>
+<h2 class="ms-2 mx-2">Migrations</h2>
 @foreach (var migration in dbContext.Database.GetAppliedMigrations())
 {
-    <p>@migration</p>
+    <p class="ms-2 mx-2">@migration</p>
 }
 @foreach (var migration in dbContext.Database.GetPendingMigrations())
 {
-    <p>@migration (pending)</p>
+    <p class="ms-2 mx-2">@migration (pending)</p>
 }
 @if (!can_connect)
 {
-    <p class="alert alert-danger">Không có khả năng kết nối đến Database</p>
+    <p class="alert alert-danger ms-2 mx-2">Không có khả năng kết nối đến Database</p>
 }
 
 @if (dbContext.Database.GetPendingMigrations().Any())
 {
     <form method="post">
-        <button class="btn btn-success" asp-action="Migrate">Tạo Db (Cập nhật migration)</button>
+        <button class="btn btn-success ms-2 mx-2" asp-action="Migrate">Tạo Db (Cập nhật migration)</button>
     </form>
 }
 
 @if (can_connect)
 {
-    <h2>Các Table</h2>
+    <h2 ms-2 mx-2>Các Table</h2>
     await dbContext.Database.OpenConnectionAsync();
     var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
     <ul>
@@ -51,8 +53,8 @@
         }
     </ul>
 
-    <a class="btn btn-danger" asp-action="DeleteDb">Xóa Db:  @dbname</a>
-    <a class="btn btn-danger" asp-action="SeedData">Seed Data</a>
+    <a class="btn btn-danger ms-2 mx-2 mb-4" asp-action="DeleteDb">Xóa Db:  @dbname</a>
+    <a class="btn btn-danger mb-4" asp-action="SeedData">Seed Data</a>
 
 
 }

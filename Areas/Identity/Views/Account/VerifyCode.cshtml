@@ -3,13 +3,13 @@
     ViewData["Title"] = "Xác thực";
 }
 
-<h1>@ViewData["Title"].</h1>
+<h1 class="ms-2 mx-2">@ViewData["Title"].</h1>
 
 <form asp-controller="Account" asp-action="VerifyCode" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input asp-for="Provider" type="hidden" />
     <input asp-for="RememberMe" type="hidden" />
-    <h4>@ViewData["Status"]</h4>
+    <h4 class="ms-2 mx-2">@ViewData["Status"]</h4>
     <hr />
     <div class="form-group">
         <label asp-for="Code" class="col-md-2 control-label"></label>

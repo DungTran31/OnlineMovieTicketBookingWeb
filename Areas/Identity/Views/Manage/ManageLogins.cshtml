@@ -4,12 +4,12 @@
     ViewData["Title"] = "Liên kết tài khoản";
 }
 
-<h1>@ViewData["Title"].</h1>
+<h1 class="ms-2 mx-2">@ViewData["Title"].</h1>
 
-<p class="text-success">@ViewData["StatusMessage"]</p>
+<p class="text-success ms-2 mx-2">@ViewData["StatusMessage"]</p>
 @if (Model.CurrentLogins.Count > 0)
 {
-    <h4>Các tài khoản đã liên kết</h4>
+    <h4 class="ms-2 mx-2">Các tài khoản đã liên kết</h4>
     <table class="table">
         <tbody>
             @for (var index = 0; index < Model.CurrentLogins.Count; index++)
@@ -39,7 +39,7 @@
 }
 @if (Model.OtherLogins.Count > 0)
 {
-    <h4>Thêm liên kết với tài khoản ngoài.</h4>
+    <h4 class="ms-2 mx-2">Thêm liên kết với tài khoản ngoài.</h4>
     <hr />
     <form asp-controller="Manage" asp-action="LinkLogin" method="post" class="form-horizontal" role="form">
         <div id="socialLoginList">

@@ -2,11 +2,11 @@
 @{
     ViewData["Title"] = "Danh sách các thành viên";
 }
-<h2>@ViewData["Title"]</h2>
+<h2 class="ms-2 mx-2">@ViewData["Title"]</h2>
 <partial name="_StatusMessage"></partial>
-<p>Tổng số thành viên: @Model.totalUsers</p>
+<p class="ms-2 mx-2">Tổng số thành viên: @Model.totalUsers</p>
 
-<table class="table">
+<table class="table text-light">
     <tr>
         <th>Tên user</th>
         <th>Vai trò (role)</th>
@@ -19,7 +19,7 @@
             <td>
                 @if (string.IsNullOrEmpty(user.RoleNames))
                 {
-                    <a class="text-dark" asp-action="AddRole" asp-route-id="@user.Id">+ Thêm roles</a>
+                    <a style="color:aliceblue" asp-action="AddRole" asp-route-id="@user.Id">+ Thêm roles</a>
                 }
                 else
                 {

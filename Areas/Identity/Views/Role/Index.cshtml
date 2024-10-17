@@ -2,17 +2,17 @@
 @{
     ViewData["Title"] = "Danh sách các role (vai trò)";
 }
-<h2>@ViewData["Title"]</h2>
+<h2 class="ms-2 mx-2">@ViewData["Title"]</h2>
 
 <partial name="_StatusMessage"></partial>
 
 
-<div class="mb-2">
+<div class="mb-2 ms-2 mx-2">
     <a class="btn btn-secondary" asp-action="Create">Tạo role mới</a>
     <a class="btn btn-secondary" asp-action="Index" asp-controller="User">Quản lý thành viên</a>
 </div>
 
-<table class="table">
+<table class="table text-light">
     <tr>
         <th>Tên Role (vai trò)</th>
         <th>Tác vụ</th>

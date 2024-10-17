@@ -2,8 +2,117 @@
     ViewData["Title"] = "Home Page";
     Layout = "_MyLayout";
 }
+@model OnlineMovieTicketBookingWeb.Models.MovieListModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<section class="feature spad">
+    <div class="container">
+        <div class="row">
+            <div class="slideshow-container">
+                <div class="mySlides fade">
+                    <img src="~/images/Movies/Poster1.jpg" alt="Poster1">
+                </div>
+                <div class="mySlides fade">
+                    <img src="~/images/Movies/Poster2.jpg" alt="Poster2">
+                </div>
+                <div class="mySlides fade">
+                    <img src="~/images/Movies/Poster3.jpg" alt="Poster3">
+                </div>
+            </div>
+            <div style="text-align:center">
+                <span class="dot" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Phim nổi bật</h2>
+                </div>
+                <div class="featured__controls">
+                    <ul>
+                        <li class="active text-light" data-filter="*">Tất cả</li>
+                        <li class="text-light" data-filter=".action">Hành động</li>
+                        <li class="text-light" data-filter=".adventure">Phiêu lưu</li>
+                        <li class="text-light" data-filter=".cartoon">Hoạt hình</li>
+                        <li class="text-light" data-filter=".horror">Kinh dị</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row featured__filter">
+        <div class="custom-flex-container">
+            @foreach (var movie in Model.movies)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="container-inside">
+                        <div class="card" style="width: 18rem;">
+                            <img src="~/images/Movies/@movie.Poster" class="card-img-top" alt="@movie.Name">
+                            <div class="card-body">
+                                <h5 class="card-title text-dark">@movie.Name</h5>
+                                <p class="card-text text-dark">@movie.MovieGenre</p>
+                                <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
+                                <div class="card-buttons">
+                                    <a href="#" class="btn btn-info">Chi tiết</a>
+                                    <a href="#" class="btn btn-primary">Mua vé</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@{
+    var pagingmodel = new PagingModel()
+            {
+                currentpage = Model.currentPage,
+                countpages = Model.countPages,
+                generateUrl = (int? p) => Url.Action("Index", new { p = p }) ?? string.Empty
+            };
+}
+
+<div class="d-flex justify-content-center">
+    <partial name="_PagingXTL" model="@pagingmodel" />
 </div>
+
+@section Scripts {
+    <script>
+        // khai báo biến slideIndex đại diện cho slide hiện tại
+        var slideIndex;
+        // khai bào hàm hiển thị slide
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+
+            slides[slideIndex].style.display = "block";
+            dots[slideIndex].className += " active";
+            //chuyển đến slide tiếp theo
+            slideIndex++;
+            //nếu đang ở slide cuối cùng thì chuyển về slide đầu
+            if (slideIndex > slides.length - 1) {
+                slideIndex = 0
+            }
+            //tự động chuyển đổi slide sau 5s
+            setTimeout(showSlides, 5000);
+        }
+        //mặc định hiển thị slide đầu tiên
+        showSlides(slideIndex = 0);
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+    </script>
+}
+
+
