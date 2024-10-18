@@ -14,6 +14,7 @@ namespace OnlineMovieTicketBookingWeb.Data
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<ScreeningRoom> ScreeningRooms { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
+        public virtual DbSet<MovieGenre> MovieGenres { get; set; }
         public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Screening> Screenings { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
@@ -112,6 +113,7 @@ namespace OnlineMovieTicketBookingWeb.Data
             });
 
             modelBuilder.Entity<Seat>().ToTable(nameof(Seat));
+            modelBuilder.Entity<MovieGenre>().ToTable(nameof(MovieGenre));
             modelBuilder.Entity<Movie>().ToTable(nameof(Movie));
             modelBuilder.Entity<Screening>().ToTable(nameof(Screening));
             modelBuilder.Entity<Staff>().ToTable(nameof(Staff));

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MovieGenre>
+<div style="overflow-x: auto; white-space: nowrap;">
+    <ul class="nav">
+        <li class="nav-item m-2 active" id="0" style="display: inline-block;" onclick="setActive(this)">
+            <a class="nav-link">All</a>
+        </li>
+        @foreach (var m in Model)
+        {
+            <li class="nav-item m-2" id="@m.Id" style="display: inline-block;" onclick="setActive(this)">
+                <a class="nav-link">@m.Name</a>
+            </li>
+        }
+    </ul>
+</div>
+
+<script>
+    function setActive(element) {
+        // Remove 'active' class from all nav items
+        var navLinks = document.querySelectorAll('.nav-item');
+        navLinks.forEach(function(link) {
+            link.classList.remove('active');
+        });
+
+        // Add 'active' class to the clicked nav link
+        element.classList.add('active');
+    }
+</script>
+
+<style>
+    .nav-item.active {
+        background-color: #f8f9fa; 
+        color: white;
+    }
+
+    .nav-item.active .nav-link {
+        color: white !important;
+    }
+</style>

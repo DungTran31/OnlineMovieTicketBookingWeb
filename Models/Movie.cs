@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineMovieTicketBookingWeb.Models
 {
@@ -59,9 +60,12 @@ namespace OnlineMovieTicketBookingWeb.Models
         [Display(Name = "Đã xóa")]
         public bool IsDeleted { get; set; }
 
-        [Display(Name = "Thể loại phim")]
-        [StringLength(100, ErrorMessage = "Thể loại phim không được vượt quá 100 ký tự")]
-        public string? MovieGenre { get; set; }
+        [Required]
+        [Display(Name = "Mã thể loại phim")]
+        [StringLength(100, ErrorMessage = "Trạng thái không được vượt quá 50 ký tự")]
+        public int MovieGenreId { get; set; }
+        [ForeignKey("MovieGenreId")]
+        public MovieGenre? MovieGenre { get; set; }
 
         [Display(Name = "Poster")]
         [StringLength(255, ErrorMessage = "URL của poster không được vượt quá 255 ký tự")]

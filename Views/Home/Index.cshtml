@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
     Layout = "_MyLayout";
 }
-@model OnlineMovieTicketBookingWeb.Models.MovieListModel
+@model IEnumerable<Movie>
 
 <section class="feature spad">
     <div class="container">
@@ -29,55 +29,65 @@
                 <div class="section-title">
                     <h2>Phim nổi bật</h2>
                 </div>
-                <div class="featured__controls">
-                    <ul>
-                        <li class="active text-light" data-filter="*">Tất cả</li>
-                        <li class="text-light" data-filter=".action">Hành động</li>
-                        <li class="text-light" data-filter=".adventure">Phiêu lưu</li>
-                        <li class="text-light" data-filter=".cartoon">Hoạt hình</li>
-                        <li class="text-light" data-filter=".horror">Kinh dị</li>
-                    </ul>
+                <div id="MovieGenre" class="featured__controls">
+                    @await Component.InvokeAsync("MovieGenre")
                 </div>
             </div>
         </div>
     </div>
-    <div class="row featured__filter">
-        <div class="custom-flex-container">
-            @foreach (var movie in Model.movies)
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="container-inside">
-                        <div class="card" style="width: 18rem;">
-                            <img src="~/images/Movies/@movie.Poster" class="card-img-top" alt="@movie.Name">
-                            <div class="card-body">
-                                <h5 class="card-title text-dark">@movie.Name</h5>
-                                <p class="card-text text-dark">@movie.MovieGenre</p>
-                                <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
-                                <div class="card-buttons">
-                                    <a href="#" class="btn btn-info">Chi tiết</a>
-                                    <a href="#" class="btn btn-primary">Mua vé</a>
+    
+    <div id="content">
+        <div class="row featured__filter">
+            <div class="custom-flex-container">
+                @foreach (var movie in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6">
+                        <div class="container-inside">
+                            <div class="card" style="width: 18rem;">
+                                <img src="~/images/Movies/@movie.Poster" class="card-img-top" alt="@movie.Name">
+                                <div class="card-body">
+                                    <h5 class="card-title text-dark">@movie.Name</h5>
+                                    <p class="card-text text-dark">@movie.MovieGenre?.Name</p>
+                                    <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
+                                    <div class="card-buttons">
+                                        <a href="#" class="btn btn-info">Chi tiết</a>
+                                        <a href="#" class="btn btn-primary">Mua vé</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
+        <ul class="pagination" style="justify-content: center">
+            <li class="page-item @(ViewBag.currentPage == 1 ? "disabled" : "")" page="@(ViewBag.currentPage - 1)"
+            @(ViewBag.mid != null ? "mid=" + ViewBag.mid : "")
+            @(ViewBag.keyword != null ? "keyword=" + ViewBag.keyword : "")>
+                <a class="page-link" href="#"><i class="fa-solid fa-chevron-left"></i></a>
+            </li>
+
+            @for (int i = 1; i <= ViewBag.pageNum; i++)
+            {
+                <li class="page-item @(ViewBag.currentPage == i ? "active" : "")" page="@i"
+                @(ViewBag.mid != null ? "mid=" + ViewBag.mid : "")
+                @(ViewBag.keyword != null ? "keyword=" + ViewBag.keyword : "")>
+                    <a class="page-link" href="#">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(ViewBag.currentPage == ViewBag.pageNum ? "disabled" : "")" page="@(ViewBag.currentPage + 1)"
+            @(ViewBag.mid != null ? "mid=" + ViewBag.mid : "")
+            @(ViewBag.keyword != null ? "keyword=" + ViewBag.keyword : "")>
+                <a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a>
+            </li>
+        </ul>
+
+
+
+
     </div>
 </section>
-
-@{
-    var pagingmodel = new PagingModel()
-            {
-                currentpage = Model.currentPage,
-                countpages = Model.countPages,
-                generateUrl = (int? p) => Url.Action("Index", new { p = p }) ?? string.Empty
-            };
-}
-
-<div class="d-flex justify-content-center">
-    <partial name="_PagingXTL" model="@pagingmodel" />
-</div>
 
 @section Scripts {
     <script>
@@ -112,6 +122,62 @@
         function currentSlide(n) {
             showSlides(slideIndex = n);
         }
+
+        // Thêm script ajax cho click vào page-item, bao gồm Previous và Next
+        $('body').on('click', 'li.page-item:not(.disabled)', function (e) {
+            e.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
+            var page = $(this).attr("page");
+            var mid = $(this).attr("mid");
+            var keyword = $(this).attr("keyword");
+            var data = { mid: mid, keyword: keyword, pageIndex: page };
+            $.ajax({
+                url: '@Url.Action("MovieFilter", "Home")',
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response); // Cập nhật nội dung danh sách phim
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error: ", status, error);
+                }
+            });
+        });
+
+        // Xử lý click cho các nav-item
+        $(".nav li").click(function (e) {
+            var id = $(this).attr("id");
+            var keyword = $("#keyword").val(); // Lấy giá trị keyword từ input
+            var data = { mid: id, keyword: keyword, pageIndex: 1 }; // Gửi cả mid, keyword và chỉ số trang
+            $.ajax({
+                url: '@Url.Action("MovieFilter", "Home")',
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response); // Cập nhật nội dung danh sách phim
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error: ", status, error);
+                }
+            });
+        });
+
+        // Xử lý click cho nút tìm kiếm
+        $("button#btnNavbarSearch").click(function (e) {
+            var keyword = $("#keyword").val();
+            var mid = $(".nav .active").attr("id"); // Lấy mid từ nav-item đang active
+            var data = { keyword: keyword, mid: mid, pageIndex: 1 }; // Gửi cả keyword, mid và chỉ số trang
+            $.ajax({
+                url: '@Url.Action("MovieFilter", "Home")',
+                data: data,
+                success: function (response) {
+                    $("div#content").html(response); // Cập nhật nội dung danh sách phim
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX Error: ", status, error);
+                }
+            });
+        });
+
+
+
     </script>
 }
 

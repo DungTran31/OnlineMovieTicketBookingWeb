@@ -12,8 +12,8 @@ using OnlineMovieTicketBookingWeb.Data;
 namespace OnlineMovieTicketBookingWeb.Migrations
 {
     [DbContext(typeof(MovieTicketBookingContext))]
-    [Migration("20241012182231_updatestaffv2")]
-    partial class updatestaffv2
+    [Migration("20241018143250_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,6 +177,10 @@ namespace OnlineMovieTicketBookingWeb.Migrations
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Discriminator")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -276,14 +280,18 @@ namespace OnlineMovieTicketBookingWeb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("MovieGenre")
+                    b.Property<int>("MovieGenreId")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Poster")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Producer")
                         .HasMaxLength(100)
@@ -302,7 +310,25 @@ namespace OnlineMovieTicketBookingWeb.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MovieGenreId");
+
                     b.ToTable("Movie", (string)null);
+                });
+
+            modelBuilder.Entity("OnlineMovieTicketBookingWeb.Models.MovieGenre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MovieGenre", (string)null);
                 });
 
             modelBuilder.Entity("OnlineMovieTicketBookingWeb.Models.Screening", b =>
@@ -497,7 +523,7 @@ namespace OnlineMovieTicketBookingWeb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("RegistrationDate")
+                    b.Property<DateTime?>("RegistrationDate")
                         .HasColumnType("datetime2");
 
                     b.ToTable("Customer", (string)null);
@@ -516,7 +542,8 @@ namespace OnlineMovieTicketBookingWeb.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("HireDate")
+                    b.Property<DateTime?>("HireDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IdentityNumber")
@@ -603,6 +630,17 @@ namespace OnlineMovieTicketBookingWeb.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("SoldTicket");
+                });
+
+            modelBuilder.Entity("OnlineMovieTicketBookingWeb.Models.Movie", b =>
+                {
+                    b.HasOne("OnlineMovieTicketBookingWeb.Models.MovieGenre", "MovieGenre")
+                        .WithMany()
+                        .HasForeignKey("MovieGenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MovieGenre");
                 });
 
             modelBuilder.Entity("OnlineMovieTicketBookingWeb.Models.Screening", b =>
