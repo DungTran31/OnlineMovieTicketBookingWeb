@@ -37,29 +37,26 @@
     </div>
     
     <div id="content">
-        <div class="row featured__filter">
-            <div class="custom-flex-container">
-                @foreach (var movie in Model)
-                {
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="container-inside">
-                            <div class="card" style="width: 18rem;">
-                                <img src="~/images/Movies/@movie.Poster" class="card-img-top" alt="@movie.Name">
-                                <div class="card-body">
-                                    <h5 class="card-title text-dark">@movie.Name</h5>
-                                    <p class="card-text text-dark">@movie.MovieGenre?.Name</p>
-                                    <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
-                                    <div class="card-buttons">
-                                        <a href="#" class="btn btn-info">Chi tiết</a>
-                                        <a href="#" class="btn btn-primary">Mua vé</a>
-                                    </div>
-                                </div>
+        <div class="row py-2 mt-auto">
+            @foreach (var movie in Model)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                    <div class="card" style="width: 18rem;">
+                        <img src="~/images/Movies/@movie.Poster" class="card-img-top img-fluid" alt="@movie.Name">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">@movie.Name</h5>
+                            <p class="card-text text-dark">@movie.MovieGenre?.Name</p>
+                            <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
+                            <div class="card-buttons d-flex justify-content-between">
+                                <a href="#" class="btn btn-info">Chi tiết</a>
+                                <a href="#" class="btn btn-primary">Mua vé</a>
                             </div>
                         </div>
                     </div>
-                }
-            </div>
+                </div>
+            }
         </div>
+
         <ul class="pagination" style="justify-content: center">
             <li class="page-item @(ViewBag.currentPage == 1 ? "disabled" : "")" page="@(ViewBag.currentPage - 1)"
             @(ViewBag.mid != null ? "mid=" + ViewBag.mid : "")
@@ -82,13 +79,97 @@
                 <a class="page-link" href="#"><i class="fa-solid fa-chevron-right"></i></a>
             </li>
         </ul>
+    </div>
+    <div class="row py-2 mt-auto">
+        <h1 class="info-header mb-4">EVENT</h1>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+            <div class="event-image" style="width: 18rem;">
+                <a href="/Event/Event1"><img src="~/images/Events/Event1.jpg" class="event-img-top img-fluid" alt="Event 1"></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+            <div class="event-image" style="width: 18rem;">
+                <a href="/Event/Event2"><img src="~/images/Events/Event2.png" class="event-img-top img-fluid" alt="Event 2"></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+            <div class="event-image" style="width: 18rem;">
+                <a href="/Event/Event3"><img src="~/images/Events/Event3.jpg" class="event-img-top img-fluid" alt="Event 3"></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+            <div class="event-image" style="width: 18rem;">
+                <a href="/Event/Event4"><img src="~/images/Events/Event4.png" class="event-img-top img-fluid" alt="Event 4"></a>
+            </div>
+        </div>
+    </div>
 
-
-
-
+    <div class="col-12">
+        <div class="row py-2 mt-auto">
+            <div class="col-12">
+                <h1 class="info-header text-center">DMHTB CINEMA</h1>
+                <p class="info-paragraph text-justify">
+                    <span><a href="#">DMHTB Cinema</a></span> là một trong những công đầu tiên về điện ảnh được thành lập từ năm 2024, đã khẳng định thương hiệu là 1 trong 10 địa điểm vui chơi giải trí được yêu thích nhất trên thế giới. Ngoài hệ thống rạp chiếu phim hiện đại, thu hút hàng triệu lượt người đến xem, DMHTB Cinema còn hấp dẫn khán giả bởi không khí thân thiện cũng như chất lượng dịch vụ hàng đầu.
+                    <br>
+                    Đến web <span><a href="/Home/Index">DMHTB Cinema</a></span>, khách hàng sẽ dễ dàng tham khảo các phim hay nhất, phim mới nhất đang chiếu hoặc sắp chiếu luôn được cập nhật thường xuyên. Lịch chiếu tại tất cả hệ thống rạp chiếu phim của DMHTB Cinema cũng được cập nhật đầy đủ hàng ngày hàng giờ trên trang chủ.
+                    <br>
+                    Từ vũ trụ điện ảnh Marvel, người hâm mộ sẽ có cuộc tái ngộ với Người Nhện qua Spider-Man: No Way Home hoặc Doctor Strange 2. Ngoài ra 007: No Time To Die, Turning Red, Minions: The Rise Of Gru..., là những tác phẩm hứa hẹn sẽ gây bùng nổ phòng vé trong thời gian tới.
+                    <br>
+                    Giờ đây đặt vé tại <span><a href="/Home/Index">DMHTB Cinema</a></span> càng thêm dễ dàng chỉ với vài thao tác vô cùng đơn giản. Để mua vé, hãy vào tab Mua vé. Quý khách có thể chọn Mua vé theo phim, theo rạp, hoặc theo ngày. Sau đó, tiến hành mua vé theo các bước hướng dẫn. Chỉ trong vài phút, quý khách sẽ nhận được tin nhắn và email phản hồi Đặt vé thành công của DMHTB Cinema. Quý khách có thể dùng tin nhắn lấy vé tại quầy vé của DMHTB Cinema hoặc quét mã QR để một bước vào rạp mà không cần tốn thêm bất kỳ công đoạn nào nữa.
+                    <br>
+                    Nếu bạn đã chọn được phim hay để xem, hãy đặt vé cực nhanh bằng box Mua Vé Nhanh ngay từ Trang Chủ. Chỉ cần một phút, tin nhắn và email phản hồi của DMHTB Cinema sẽ gửi ngay vào điện thoại và hộp mail của bạn.
+                    <br>
+                    Nếu chưa quyết định sẽ xem phim mới nào, hãy tham khảo các bộ phim hay trong mục Phim Đang Chiếu cũng như Phim Sắp Chiếu tại rạp chiếu phim bằng cách vào mục Bình Luận Phim ở Góc Điện Ảnh để đọc những bài bình luận chân thật nhất, tham khảo và cân nhắc. Sau đó, chỉ việc đặt vé bằng box Mua Vé Nhanh ngay ở đầu trang để chọn được suất chiếu và chỗ ngồi vừa ý nhất.
+                    <br>
+                    <span><a href="/Home/Index">DMHTB Cinema</a></span> luôn có những chương trình khuyến mãi, ưu đãi, quà tặng vô cùng hấp dẫn như giảm giá vé, tặng vé xem phim miễn phí, tặng Combo, tặng quà phim…  dành cho các khách hàng.
+                    <br>
+                    Trang web <span><a href="/Home/Index">DMHTB Cinema</a></span> còn có mục Góc Điện Ảnh - nơi lưu trữ dữ liệu về phim, diễn viên và đạo diễn, những bài viết chuyên sâu về điện ảnh, hỗ trợ người yêu phim dễ dàng hơn trong việc lựa chọn phim và bổ sung thêm kiến thức về điện ảnh cho bản thân. Ngoài ra, vào mỗi tháng, DMHTB Cinema cũng giới thiệu các phim sắp chiếu hot nhất trong mục Phim Hay Tháng.
+                    <br>
+                    Hiện nay, <span><a href="/Home/Index">DMHTB Cinema</a></span> đang ngày càng phát triển hơn nữa với các chương trình đặc sắc, các khuyến mãi hấp dẫn, đem đến cho khán giả những bộ phim bom tấn của thế giới và Việt Nam nhanh chóng và sớm nhất.
+                </p>
+            </div>
+        </div>
     </div>
 </section>
 
+
+<style>
+    .pagination .page-item.active {
+        background-color: purple !important; /* Màu nền tím khi active */
+    }
+
+
+    .pagination .page-item.disabled {
+        opacity: 0.5; /* Giảm độ sáng cho nút disabled */
+        pointer-events: none; /* Không cho phép tương tác với nút disabled */
+    }
+    /* main info */
+    .info-header {
+        width: 90%;
+        background: linear-gradient(132deg, #A73EE7 0%, #00EBFF 100%);
+        border-radius: 40px;
+        margin: auto;
+        color: #fff;
+        text-align: center;
+    }
+
+    .info-paragraph {
+        width: 95%;
+        margin-left: 20px;
+        padding: 10px 20px 10px 0;
+        line-height: 26px;
+        font-weight: 300;
+    }
+
+    .info-paragraph span {
+        font-weight: bold;
+    }
+
+    .info-paragraph span a {
+        text-decoration: none;
+        color: #cccccc;
+    }
+</style>
 @section Scripts {
     <script>
         // khai báo biến slideIndex đại diện cho slide hiện tại

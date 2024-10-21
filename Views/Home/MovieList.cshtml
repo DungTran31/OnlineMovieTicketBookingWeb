@@ -46,5 +46,18 @@
     </li>
 </ul>
 
+<style>
+    .pagination .page-item.active {
+        background-color: purple; /* Màu nền tím khi active */
+        color: white; /* Màu chữ trắng cho dễ đọc */
+    }
 
+    .pagination .page-item {
+        background-color: black; /* Màu nền đen khi không active */
+    }
 
+    .pagination .page-item.disabled {
+        opacity: 0.5; /* Giảm độ sáng cho nút disabled */
+        pointer-events: none; /* Không cho phép tương tác với nút disabled */
+    }
+</style>

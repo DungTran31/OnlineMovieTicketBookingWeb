@@ -79,6 +79,13 @@
   --bs-highlight-bg: #fff3cd;
 }
 
+/* Mobile */
+@media (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
 *,
 *::before,
 *::after {
@@ -11438,4 +11445,6 @@ body {
 }
 
 
-
+/* event-box */
+.event-box{
+}

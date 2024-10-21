@@ -9,7 +9,7 @@ namespace OnlineMovieTicketBookingWeb.ViewComponents
         public RenderViewComponent()
         {
             MenuItems = new List<MenuItem>() {
-                    new MenuItem() {Id=1, Name="Home", Link="Home/List", Icon="fas fa-home" },
+                    new MenuItem() {Id=1, Name="Home", Link="Home/Index", Icon="fas fa-home" },
                     new MenuItem() {Id=2, Name="Phim đang chiếu", Link="Phim đang chiếu/List", Icon="fas fa-film" },
                     new MenuItem() {Id=3, Name="Giá vé", Link="Giá vé/List", Icon="fas fa-ticket-alt" },
                     new MenuItem() {Id=4, Name="Rạp", Link="Rạp/List", Icon="fas fa-building" },

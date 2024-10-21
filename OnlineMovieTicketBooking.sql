@@ -45,6 +45,10 @@ CREATE TABLE Seat (
     FOREIGN KEY (seattypeid) REFERENCES seattype(id)
 );
 
+CREATE TABLE MovieGenre (
+	id INT PRIMARY KEY,
+	Name NVARCHAR(max)
+);
 -- phim 
 CREATE TABLE Movie (
     id NVARCHAR(50) PRIMARY KEY,
@@ -59,7 +63,7 @@ CREATE TABLE Movie (
     summary NVARCHAR(255),
     status NVARCHAR(50),
     isdeleted BIT,
-    moviegenre NVARCHAR(100) 
+    FOREIGN KEY (moviegenreid) REFERENCES moviegenre(id)
 );
 
 
@@ -122,28 +126,44 @@ INSERT INTO TicketPrice (name, price) VALUES
 (N'Vé trẻ em', 50000),
 (N'Vé người lớn', 100000),
 (N'Vé sinh viên', 80000);
+INSERT INTO moviegenre (name) values
+(N'Hành động'),
+(N'Phiêu lưu'),
+(N'Kinh dị'),
+(N'Khoa học viễn tưởng'),
+(N'Tâm lý'),
+(N'Thể thao'),
+(N'Lịch sử'),
+(N'Tội phạm'),
+(N'Hoạt hình'),
+(N'Huyền ảo'),
+(N'Lãng mạn');
 
-INSERT INTO movie (id, name, duration, agerestriction, releasedate, language, actors, country, producer, summary, status, isdeleted, moviegenre) VALUES
-(N'P01', N'Avengers: Endgame', 181, 13, '2019-04-26', N'Tiếng Anh', N'Robert Downey Jr., Chris Evans', N'Mỹ', N'Marvel Studios', N'Cuộc chiến cuối cùng giữa các siêu anh hùng và Thanos', N'Đang chiếu', 0, N'Hành động'),
-(N'P02', N'Frozen II', 103, 0, '2019-11-22', N'Tiếng Anh', N'Idina Menzel, Kristen Bell', N'Mỹ', N'Walt Disney Animation Studios', N'Hành trình mới của Elsa và Anna để khám phá quá khứ của gia đình họ', N'Đang chiếu', 0, N'Hoạt hình'),
-(N'P03', N'Parasite', 132, 16, '2019-05-30', N'Tiếng Hàn', N'Song Kang-ho, Lee Sun-kyun', N'Hàn Quốc', N'Barunson E&A', N'Câu chuyện về sự chênh lệch giàu nghèo trong xã hội Hàn Quốc', N'Đã chiếu', 0, N'Kinh dị'),
-(N'P04', N'The Conjuring', 112, 18, '2013-07-19', N'Tiếng Anh', N'Vera Farmiga, Patrick Wilson', N'Mỹ', N'New Line Cinema', N'Một cặp vợ chồng điều tra những hiện tượng siêu nhiên', N'Đã chiếu', 0, N'Kinh dị'),
-(N'P05', N'Avatar', 162, 13, '2009-12-18', N'Tiếng Anh', N'Sam Worthington, Zoe Saldana', N'Mỹ', N'20th Century Fox', N'Một câu chuyện khoa học viễn tưởng về hành tinh Pandora', N'Đang chiếu', 0, N'Phiêu lưu');
+INSERT INTO movie (id, name, duration, agerestriction, releasedate, language, actors, country, producer, summary, status, isdeleted, moviegenreid, poster) VALUES
+(N'P01', N'Avengers: Endgame', 181, 13, '2019-04-26', N'Tiếng Anh', N'Robert Downey Jr., Chris Evans', N'Mỹ', N'Marvel Studios', N'Cuộc chiến cuối cùng giữa các siêu anh hùng và Thanos', N'Đang chiếu', 0, 1, N'Avengers_Endgame.png'),
+(N'P02', N'Frozen II', 103, 0, '2019-11-22', N'Tiếng Anh', N'Idina Menzel, Kristen Bell', N'Mỹ', N'Walt Disney Animation Studios', N'Hành trình mới của Elsa và Anna để khám phá quá khứ của gia đình họ', N'Đang chiếu', 0, 9, N'Frozen2.png'),
+(N'P03', N'Parasite', 132, 16, '2019-05-30', N'Tiếng Hàn', N'Song Kang-ho, Lee Sun-kyun', N'Hàn Quốc', N'Barunson E&A', N'Câu chuyện về sự chênh lệch giàu nghèo trong xã hội Hàn Quốc', N'Đã chiếu', 0, 3, N'Parasite.png'),
+(N'P04', N'The Conjuring', 112, 18, '2013-07-19', N'Tiếng Anh', N'Vera Farmiga, Patrick Wilson', N'Mỹ', N'New Line Cinema', N'Một cặp vợ chồng điều tra những hiện tượng siêu nhiên', N'Đã chiếu', 0, 3, N'The_Conjuring.png'),
+(N'P05', N'Avatar', 162, 13, '2009-12-18', N'Tiếng Anh', N'Sam Worthington, Zoe Saldana', N'Mỹ', N'20th Century Fox', N'Một câu chuyện khoa học viễn tưởng về hành tinh Pandora', N'Đang chiếu', 0, 2, N'Avatar.png');
 
-INSERT INTO Users (Id, UserName, NormalizedUserName, Email, NormalizedEmail, PasswordHash, SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount, EmailConfirmed) 
+update movie
+set poster = N'Avatar.png'
+where id = N'P05';
+
+INSERT INTO Users (Id, UserName, NormalizedUserName, Email, NormalizedEmail, PasswordHash, SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount, EmailConfirmed, dateOfBirth) 
 VALUES 
-(N'KH01', N'kh01@example.com', N'KH01@EXAMPLE.COM', N'kh01@example.com', N'KH01@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'KH02', N'kh02@example.com', N'KH02@EXAMPLE.COM', N'kh02@example.com', N'KH02@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'KH03', N'kh03@example.com', N'KH03@EXAMPLE.COM', N'kh03@example.com', N'KH03@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'KH04', N'kh04@example.com', N'KH04@EXAMPLE.COM', N'kh04@example.com', N'KH04@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'KH05', N'kh05@example.com', N'KH05@EXAMPLE.COM', N'kh05@example.com', N'KH05@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0);
+(N'KH01', N'kh01@example.com', N'KH01@EXAMPLE.COM', N'kh01@example.com', N'KH01@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'KH02', N'kh02@example.com', N'KH02@EXAMPLE.COM', N'kh02@example.com', N'KH02@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'KH03', N'kh03@example.com', N'KH03@EXAMPLE.COM', N'kh03@example.com', N'KH03@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'KH04', N'kh04@example.com', N'KH04@EXAMPLE.COM', N'kh04@example.com', N'KH04@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'KH05', N'kh05@example.com', N'KH05@EXAMPLE.COM', N'kh05@example.com', N'KH05@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567');
 
-INSERT INTO customer (id, fullname, identitynumber, address, registrationdate, dateofbirth, gender) VALUES
-(N'KH01', N'Nguyễn Văn T', N'123456789', N'Số 1, Đường T, Quận 1', '2024-01-01', '1990-05-15', N'Nam'),
-(N'KH02', N'Trần Thị Y', N'987654321', N'Số 2, Đường Y, Quận 2', '2024-02-01', '1995-07-20', N'Nữ'),
-(N'KH03', N'Phạm Minh H', N'321321321', N'Số 3, Đường H, Quận 3', '2024-03-01', '1992-11-11', N'Nam'),
-(N'KH04', N'Lê Thị K', N'654987321', N'Số 4, Đường K, Quận 4', '2024-04-01', '1988-03-30', N'Nữ'),
-(N'KH05', N'Vũ Văn M', N'456123789', N'Số 5, Đường M, Quận 5', '2024-05-01', '1991-12-25', N'Nam');
+INSERT INTO customer (id, fullname, identitynumber, registrationdate, gender) VALUES
+(N'KH01', N'Nguyễn Văn T', N'123456789', '2024-01-01', N'Nam'),
+(N'KH02', N'Trần Thị Y', N'987654321', '2024-02-01', N'Nữ'),
+(N'KH03', N'Phạm Minh H', N'321321321', '2024-03-01', N'Nam'),
+(N'KH04', N'Lê Thị K', N'654987321', '2024-04-01', N'Nữ'),
+(N'KH05', N'Vũ Văn M', N'456123789', '2024-05-01', N'Nam');
 
 INSERT INTO ScreeningRoom ([RowCount], seatcount) VALUES
 (10, 15),
@@ -166,20 +186,20 @@ INSERT INTO screening (id, starttime, endtime, screeningdate, movieid, screening
 (N'SC04', '15:30:00', '17:30:00', '2024-10-12', N'P04', 4, N'DD04'),
 (N'SC05', '10:00:00', '12:30:00', '2024-10-13', N'P05', 5, N'DD05');
 
-INSERT INTO Users (Id, UserName, NormalizedUserName, Email, NormalizedEmail, PasswordHash, SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount, EmailConfirmed) 
+INSERT INTO Users (Id, UserName, NormalizedUserName, Email, NormalizedEmail, PasswordHash, SecurityStamp, ConcurrencyStamp, PhoneNumber, PhoneNumberConfirmed, TwoFactorEnabled, LockoutEnd, LockoutEnabled, AccessFailedCount, EmailConfirmed, DateOfBirth) 
 VALUES 
-(N'NV01', N'nv01@example.com', N'NV01@EXAMPLE.COM', N'nv01@example.com', N'NV01@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'NV02', N'nv02@example.com', N'NV02@EXAMPLE.COM', N'nv02@example.com', N'NV02@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'NV03', N'nv03@example.com', N'NV03@EXAMPLE.COM', N'nv03@example.com', N'NV03@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'NV04', N'nv04@example.com', N'NV04@EXAMPLE.COM', N'nv04@example.com', N'NV04@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0),
-(N'NV05', N'nv05@example.com', N'NV05@EXAMPLE.COM', N'nv05@example.com', N'NV05@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0);
+(N'NV01', N'nv01@example.com', N'NV01@EXAMPLE.COM', N'nv01@example.com', N'NV01@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'NV02', N'nv02@example.com', N'NV02@EXAMPLE.COM', N'nv02@example.com', N'NV02@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'NV03', N'nv03@example.com', N'NV03@EXAMPLE.COM', N'nv03@example.com', N'NV03@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'NV04', N'nv04@example.com', N'NV04@EXAMPLE.COM', N'nv04@example.com', N'NV04@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567'),
+(N'NV05', N'nv05@example.com', N'NV05@EXAMPLE.COM', N'nv05@example.com', N'NV05@EXAMPLE.COM', N'your_password_hash', N'your_security_stamp', N'your_concurrency_stamp', NULL, 0, 0, NULL, 1, 0, 0, '2024-10-18 14:30:00.1234567');
 
-INSERT INTO staff (id, FullName, identitynumber, address, hiredate, gender, isactive, role) VALUES
-(N'NV01', N'Nguyễn Văn A', N'123456789', N'Số 1, Đường A, Quận 1', '2024-01-01', N'Nam', 1, N'Nhân viên bán vé'),
-(N'NV02', N'Trần Thị B', N'987654321', N'Số 2, Đường B, Quận 2', '2024-02-01', N'Nữ', 1, N'Quản lý'),
-(N'NV03', N'Phạm Minh C', N'123123123', N'Số 3, Đường C, Quận 3', '2024-03-01', N'Nam', 1, N'Nhân viên bán vé'),
-(N'NV04', N'Lê Thị D', N'321321321', N'Số 4, Đường D, Quận 4', '2024-04-01', N'Nữ', 1, N'Nhân viên bán vé'),
-(N'NV05', N'Vũ Văn E', N'456456456', N'Số 5, Đường E, Quận 5', '2024-05-01', N'Nam', 1, N'Nhân viên bán vé');
+INSERT INTO staff (id, FullName, identitynumber, hiredate, gender, isactive, role) VALUES
+(N'NV01', N'Nguyễn Văn A', N'123456789', '2024-01-01', N'Nam', 1, N'Nhân viên bán vé'),
+(N'NV02', N'Trần Thị B', N'987654321', '2024-02-01', N'Nữ', 1, N'Quản lý'),
+(N'NV03', N'Phạm Minh C', N'123123123', '2024-03-01', N'Nam', 1, N'Nhân viên bán vé'),
+(N'NV04', N'Lê Thị D', N'321321321', '2024-04-01', N'Nữ', 1, N'Nhân viên bán vé'),
+(N'NV05', N'Vũ Văn E', N'456456456', '2024-05-01', N'Nam', 1, N'Nhân viên bán vé');
 
 INSERT INTO SoldTicket (id, solddate, totalprice, screeningid, ticketpriceid, seatid, staffid) VALUES
 (N'VB01', '2024-10-10', 50000, N'SC01', 1, 1, N'NV01'),

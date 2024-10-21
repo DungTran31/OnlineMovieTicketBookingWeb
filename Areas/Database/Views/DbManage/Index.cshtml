@@ -43,7 +43,7 @@
 
 @if (can_connect)
 {
-    <h2 ms-2 mx-2>Các Table</h2>
+    <h2 class="ms-2 mx-2">Các Table</h2>
     await dbContext.Database.OpenConnectionAsync();
     var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
     <ul>
