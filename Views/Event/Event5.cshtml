@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Event5 Page";
+    Layout = "_MyLayout";
+}
+
+<div class="container">
+    <h1 class="title">THÁNG 10 NGẬP TRÀN QUÀ TẶNG</h1>
+
+    <div class="row">
+        <div class="col-lg-4 promo">
+            <img src="~/images/Events/Details/EventDetail5.jpg" alt="THÁNG 10 NGẬP TRÀN QUÀ TẶNG Image">
+        </div>
+        <div class="col-lg-8 promo-text">
+            <p><strong>1. Thời hạn nhận quà:</strong> 12.10.2024 - 31.10.2024</p>
+
+            <p><strong>Quà tặng sinh nhật:</strong></p>
+
+            <p><strong>2. Nội dung chương trình:</strong></p>
+            <ul>
+                <li>Khách hàng khi mua combo bắp nước có từ 02 ly Coke 32oz trở lên</li>
+                <li>-> Tặng 01 lần refill Coke 32oz và 01 lần refill bắp Cola 44oz; VÀ</li>
+                <li>-> Tặng 01 móc khóa DMHTBxCOCA kỷ niệm 10 năm đồng hành.</li>
+            </ul>
+
+            <p><strong>3. Điều kiện và điều khoản chương trình:</strong></p>
+            <ul>
+                <li>Coupon quà tặng chỉ có giá trị quy đổi trong ngày tại rạp đã mua.</li>
+                <li>Được áp dụng tặng lũy tiến quà tặng.</li>
+                <li>Được áp dụng đồng thời với các chương trình khuyến mãi khác.</li>
+                <li>Không áp dụng tách hoặc gộp giá trị hóa đơn dưới mọi hình thức.</li>
+            </ul>
+
+            <p><strong>Lưu ý:</strong></p>
+            <ul>
+                <li>Refill Coke mặc định là Coca/Coca Zero/Fanta/Sprite.</li>
+                <li>Refill bắp mặc định là bắp vị Cola, không áp đụng đổi vị khác.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+    .title {
+        color: #00EBFF;
+        font-size: 1.75rem;
+        font-weight: bold;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .promo img {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .promo-text {
+        margin-top: 20px;
+        font-size: 1rem;
+        color: white;
+    }
+
+    .promo-text ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .promo-text ul li {
+        padding-left: 15px;
+        position: relative;
+    }
+
+    .promo-text ul li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: red;
+    }
+</style>
