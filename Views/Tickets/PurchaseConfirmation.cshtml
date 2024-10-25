@@ -1,0 +1,45 @@
+﻿@model OnlineMovieTicketBookingWeb.Models.SoldTicket
+
+@{
+    ViewData["Title"] = "Purchase Confirmation";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<h2>Purchase Confirmation</h2>
+
+<div>
+    <h4>Ticket Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Movie Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Screening?.Movie?.Name
+        </dd>
+        <dt class="col-sm-2">
+            Screening Date
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Screening?.ScreeningDate.ToShortDateString()
+        </dd>
+        <dt class="col-sm-2">
+            Start Time
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Screening?.StartTime
+        </dd>
+        <dt class="col-sm-2">
+            End Time
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Screening?.EndTime
+        </dd>
+        <dt class="col-sm-2">
+            Total Price
+        </dt>
+        <dd class="col-sm-10">
+            @Model.TotalPrice
+        </dd>
+    </dl>
+</div>

@@ -48,8 +48,8 @@
                             <p class="card-text text-dark">@movie.MovieGenre?.Name</p>
                             <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
                             <div class="card-buttons d-flex justify-content-between">
-                                <a href="#" class="btn btn-info">Chi tiết</a>
-                                <a href="#" class="btn btn-primary">Mua vé</a>
+                                <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@movie.Id" class="btn btn-info">Chi tiết</a>
+                                <a asp-controller="SoldTicket" asp-action="BuyTicket" class="btn btn-primary">Mua vé</a>
                             </div>
                         </div>
                     </div>

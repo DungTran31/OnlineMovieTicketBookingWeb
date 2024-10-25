@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Phim";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+@model IEnumerable<Movie>
+
+<div class="container mt-4">
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <div class="text-center mb-4">
+        <a href="@Url.Action("Index", new { status = "dangchieu" })" class="btn btn-primary">Phim đang chiếu</a>
+        <a href="@Url.Action("Index", new { status = "sapchieu" })" class="btn btn-secondary">Phim sắp chiếu</a>
+    </div>
+    <div class="row py-2 mt-auto">
+        @foreach (var movie in Model)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <img src="~/images/Movies/@movie.Poster" class="card-img-top img-fluid" alt="@movie.Name">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark">@movie.Name</h5>
+                        <p class="card-text text-dark">@movie.MovieGenre?.Name</p>
+                        <p class="card-text text-dark">@movie.Duration phút</p>
+                        <p class="card-text text-black">
+                            @if (movie.ReleaseDate >= DateTime.Now)
+                            {
+                                <span>@movie.ReleaseDate.ToString("dd-MM-yyyy")</span>
+                            }
+                        </p>
+                        <div class="card-buttons d-flex justify-content-between">
+                            @if (movie.ReleaseDate < DateTime.Now)
+                            {
+                                <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@movie.Id" class="btn btn-info">Chi tiết</a>
+                                <a asp-controller="Tickets" asp-action="Purchase" asp-route-movieId="@movie.Id" class="btn btn-primary">Mua vé</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@movie.Id" class="btn btn-info">Chi tiết</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+     </div>
+</div>

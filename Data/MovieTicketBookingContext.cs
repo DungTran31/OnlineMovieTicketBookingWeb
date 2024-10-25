@@ -21,34 +21,6 @@ namespace OnlineMovieTicketBookingWeb.Data
         public virtual DbSet<SoldTicket> SoldTickets { get; set; }
         public virtual DbSet<BookedTicket> BookedTickets { get; set; }
 
-        public override int SaveChanges()
-        {
-            AddStaffForNewUsers();
-            return base.SaveChanges();
-        }
-
-        private void AddStaffForNewUsers()
-        {
-            var newUsers = ChangeTracker.Entries<AppUser>()
-                             .Where(e => e.State == EntityState.Added)
-                             .Select(e => e.Entity);
-
-            foreach (var user in newUsers)
-            {
-                var newStaff = new Staff
-                {
-                    Id = user.Id,
-                    FullName = "",
-                    Gender = "Not Specified",
-                    HireDate = DateTime.Now,
-                    IsActive = true,
-                    Role = "Editor" 
-                };
-                Staffs.Add(newStaff); 
-            }
-        }
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

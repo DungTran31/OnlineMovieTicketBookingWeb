@@ -22,6 +22,9 @@ namespace OnlineMovieTicketBookingWeb.Models
         [Range(0, int.MaxValue, ErrorMessage = "Giá vé phải là một số không âm")]
         [Display(Name = "Giá vé")]
         public int Price { get; set; }
+        [Display(Name = "Image")]
+        [StringLength(255, ErrorMessage = "URL của Image không được vượt quá 255 ký tự")]
+        public string? Image { get; set; }
 
         public ICollection<SoldTicket> SoldTickets { get; set; }
     }

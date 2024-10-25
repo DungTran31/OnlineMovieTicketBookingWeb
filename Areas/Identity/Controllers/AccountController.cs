@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
+using OnlineMovieTicketBookingWeb.Data;
 
 namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
 {
@@ -23,17 +25,20 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly MovieTicketBookingContext _context;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<AccountController> _logger;
 
         public AccountController(
             UserManager<AppUser> userManager,
             SignInManager<AppUser> signInManager,
+            MovieTicketBookingContext context,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
             _emailSender = emailSender;
             _logger = logger;
         }
@@ -159,7 +164,7 @@ namespace OnlineMovieTicketBookingWeb.Areas.Identity.Controllers
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
-
+                    
                 }
 
                 ModelState.AddModelError(result);

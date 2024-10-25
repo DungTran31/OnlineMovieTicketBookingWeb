@@ -1,0 +1,77 @@
+﻿@model OnlineMovieTicketBookingWeb.Models.Movie
+
+@{
+   ViewData["Title"] = "Movie Details";
+    Layout = "_MyLayout";
+}
+
+<div class="m-5" style="margin-top: 0;">
+   <h4>Movie</h4>
+    <img src="~/images/Movies/@Model.Poster" class="img-fluid" alt="Movie Poster" />
+    <dl class="row">
+       <dt class="col-sm-2">
+           @Html.DisplayNameFor(model => model.Name)
+       </dt>
+       <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+       </dd>
+        <dt class="col-sm-2">  
+           @Html.DisplayNameFor(model => model.MovieGenre.Name)  
+        </dt>  
+        <dd class="col-sm-10">  
+           @Html.DisplayFor(model => model.MovieGenre.Name)  
+        </dd>
+       <dt class="col-sm-2">
+           @Html.DisplayNameFor(model => model.ReleaseDate)
+       </dt>
+       <dd class="col-sm-10">
+           @Html.DisplayFor(model => model.ReleaseDate)
+       </dd>
+       <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Duration)
+       </dt>
+       <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Duration)
+       </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AgeRestriction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AgeRestriction)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Language)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Language)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Actors)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Actors)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Producer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Producer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+       <dt class="col-sm-2">
+           @Html.DisplayNameFor(model => model.Summary)
+       </dt>
+       <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Summary)
+       </dd>
+   </dl>
+</div>
+<div class="ms-5 mx-5 mb-5">
+    <a asp-controller="SoldTicket" asp-action="BuyTicket" class="btn btn-primary">Mua vé</a>
+    <a href="/Movie?status=dangchieu" class="btn btn-primary">Back to List</a>
+</div>

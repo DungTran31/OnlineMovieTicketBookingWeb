@@ -6,7 +6,7 @@ namespace OnlineMovieTicketBookingWeb.Models
     {
         [Key]
         [Display(Name = "Mã thể loại phim")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Display(Name = "Tên thể loại phim")]
         public string? Name { get; set; }
     }
