@@ -15,43 +15,35 @@
     else
     {
         <form asp-action="ConfirmPurchase" method="post" class="p-3">
-            <div class="table-responsive">
-                <table class="table table-bordered text-white">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Movie</th>
-                            <th>Screening Room</th>
-                            <th>Available Seats</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var screening in Model)
-                        {
-                            <tr>
-                                <td>@screening.Movie?.Name</td>
-                                <td>@screening.ScreeningRoom?.Id</td>
-                                <td>
-                                    @if (screening.ScreeningRoom?.Seats != null)
-                                    {
-                                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
-                                            @foreach (var seat in screening.ScreeningRoom.Seats.Where(s => s.IsChosen == "Chưa chọn"))
-                                            {
-                                                <div class="col">
-                                                    <div class="form-check">
-                                                        <input type="radio" name="SelectedSeatId" value="@seat.Id" class="form-check-input" id="seat_@seat.Id" />
-                                                        <label class="form-check-label text-white" for="seat_@seat.Id">
-                                                            @seat.RowPosition @seat.SeatPosition (@seat.SeatType?.SeatName)
-                                                        </label>
-                                                    </div>
+            <div class="row">
+                @foreach (var screening in Model)
+                {
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card bg-dark text-white">
+                            <div class="card-body">
+                                <h5 class="card-title">@screening.Movie?.Name</h5>
+                                <p class="card-text">Screening Room: @screening.ScreeningRoom?.Id</p>
+                                <p class="card-text">Available Seats:</p>
+                                @if (screening.ScreeningRoom?.Seats != null)
+                                {
+                                    <div class="row row-cols-1 row-cols-md-2 g-2">
+                                        @foreach (var seat in screening.ScreeningRoom.Seats.Where(s => s.IsChosen == "Chưa chọn"))
+                                        {
+                                            <div class="col">
+                                                <div class="form-check">
+                                                    <input type="radio" name="SelectedSeatId" value="@seat.Id" class="form-check-input" id="seat_@seat.Id" />
+                                                    <label class="form-check-label text-white" for="seat_@seat.Id">
+                                                        @seat.RowPosition @seat.SeatPosition (@seat.SeatType?.SeatName)
+                                                    </label>
                                                 </div>
-                                            }
-                                        </div>
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
             <button type="submit" class="mt-5 btn btn-primary">Confirm Purchase</button>
         </form>

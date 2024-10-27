@@ -49,21 +49,21 @@
     
     <div id="content">
         <div class="row py-2 mt-auto">
-            
-
             @foreach (var movie in Model)
             {
-                <div class="col-lg-4 col-md-4 col-sm-6 mb-4 d-flex justify-content-center">
-                    <div class="card" style="width: 18rem;">
-                        <img src="~/images/Movies/@movie.Poster" class="card-img-top img-fluid" alt="@movie.Name">
-                        <div class="card-body">
+                <div class="col-lg-4 col-md-6 col-sm-6 mb-4 d-flex justify-content-center">
+                    <div class="card h-100" style="width: 18rem;">
+                        <img src="~/images/Movies/@movie.Poster" class="card-img-top img-fluid" alt="@movie.Name" style="height: 300px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
                             <h5 class="card-title text-dark">@movie.Name</h5>
                             <p class="card-text text-dark">@movie.MovieGenre?.Name</p>
-                            <p class="card-text text-dark">@movie.ReleaseDate.ToString("dd-MM-yyyy")</p>
-                            <div class="card-buttons d-flex justify-content-between">
-                                <a asp-controller="Movie" asp-action="MovieDetails" asp-route-id="@movie.Id" class="btn btn-info">Chi tiết</a>
-                                <a asp-controller="SoldTicket" asp-action="BuyTicket" class="btn btn-primary">Mua vé</a>
-                            </div>
+                            <p class="card-text text-dark">@movie.Duration phút</p>
+                            <p class="card-text text-black">
+                                @if (movie.ReleaseDate >= DateTime.Now)
+                                {
+                                    <span>@movie.ReleaseDate.ToString("dd-MM-yyyy")</span>
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -93,6 +93,7 @@
             </li>
         </ul>
     </div>
+
 
     <div class="row py-2 mt-auto">
         <h1 class="info-header mb-4">EVENT</h1>

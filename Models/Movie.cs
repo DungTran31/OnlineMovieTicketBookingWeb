@@ -62,7 +62,6 @@ namespace OnlineMovieTicketBookingWeb.Models
 
         [Required]
         [Display(Name = "Mã thể loại phim")]
-        [StringLength(100, ErrorMessage = "Trạng thái không được vượt quá 50 ký tự")]
         public int MovieGenreId { get; set; }
         [ForeignKey("MovieGenreId")]
         public MovieGenre? MovieGenre { get; set; }
@@ -70,6 +69,9 @@ namespace OnlineMovieTicketBookingWeb.Models
         [Display(Name = "Poster")]
         [StringLength(255, ErrorMessage = "URL của poster không được vượt quá 255 ký tự")]
         public string? Poster { get; set; }
+
+        [NotMapped]
+        public IFormFile? PosterFile { get; set; }
 
         public ICollection<Screening> Screenings { get; set; }
     }
