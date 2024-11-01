@@ -128,7 +128,7 @@ namespace OnlineMovieTicketBookingWeb
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseStatusCodePagesWithRedirects("/Home/NotFound");
+            app.UseStatusCodePagesWithRedirects("/Home/NotFound");
 
             app.MapControllerRoute(
                 name: "default",

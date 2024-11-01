@@ -42,7 +42,6 @@ namespace OnlineMovieTicketBookingWeb.Controllers
 
         public async Task<IActionResult> MovieFilter(int? mid, string? keyword, int? pageIndex)
         {
-            //lấy toàn bộ movies trong dbset chuyển về IQueryable<movies> để query
             var movies = (IQueryable<Movie>)_context.Movies.Include(m => m.MovieGenre);
             //lấy chỉ số trang, nếu chỉ số trang null thì gán ngầm định bằng 1
             int page = (int)(pageIndex == null || pageIndex <= 0 ? 1 : pageIndex);
