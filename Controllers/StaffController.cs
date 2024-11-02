@@ -84,11 +84,10 @@ namespace OnlineMovieTicketBookingWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,FullName,IdentityNumber,HireDate,Gender,IsActive,Role")] Staff staff)
+        public async Task<IActionResult> Edit(string id, Staff staff)
         {
             if (id != staff.Id)
             {
-                _logger.LogWarning("Edit action: Mismatch between route id {RouteId} and staff id {StaffId}.", id, staff.Id);
                 return NotFound();
             }
 
@@ -96,19 +95,33 @@ namespace OnlineMovieTicketBookingWeb.Controllers
             {
                 try
                 {
-                    _context.Update(staff);
+                    var existingStaff = await _context.Staffs.FindAsync(id);
+                    if (existingStaff == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Manually update the properties you want to change
+                    existingStaff.FullName = staff.FullName;
+                    existingStaff.IdentityNumber = staff.IdentityNumber;
+                    existingStaff.HireDate = staff.HireDate;
+                    existingStaff.Gender = staff.Gender;
+                    existingStaff.Role = staff.Role;
+
+                    _context.Update(existingStaff);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException ex)
                 {
                     if (!StaffExists(staff.Id))
                     {
-                        _logger.LogWarning("Edit action: Staff with id {Id} not found during concurrency check.", staff.Id);
                         return NotFound();
                     }
                     else
                     {
-                        throw;
+                        _logger.LogError(ex, "Concurrency error occurred while updating staff with id {Id}.", staff.Id);
+                        ModelState.AddModelError(string.Empty, "Unable to save changes. The staff was updated or deleted by another user.");
+                        return View(staff);
                     }
                 }
                 return RedirectToAction(nameof(Index));
@@ -116,9 +129,11 @@ namespace OnlineMovieTicketBookingWeb.Controllers
             return View(staff);
         }
 
+
+
         private bool StaffExists(string id)
         {
-            return (_context.Staffs?.Any(s => s.Id == id)).GetValueOrDefault();
+            return (_context.Staffs.Any(s => s.Id == id));
         }
 
 

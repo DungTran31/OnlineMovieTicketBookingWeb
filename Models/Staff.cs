@@ -38,7 +38,6 @@ namespace OnlineMovieTicketBookingWeb.Models
         [Display(Name = "Giới tính")]
         public string? Gender { get; set; }
 
-        [StringLength(10, ErrorMessage = "Trạng thái không được vượt quá 10 ký tự")]
         [Display(Name = "Trạng thái hoạt động")]
         public bool IsActive { get; set; }
 

@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineMovieTicketBookingWeb.Data;
 using OnlineMovieTicketBookingWeb.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace OnlineMovieTicketBookingWeb.Controllers
 {
@@ -80,7 +77,7 @@ namespace OnlineMovieTicketBookingWeb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,FullName,IdentityNumber,RegistrationDate,Gender")] Customer customer)
+        public async Task<IActionResult> Edit(string id, Customer customer)
         {
             if (id != customer.Id)
             {
@@ -91,7 +88,19 @@ namespace OnlineMovieTicketBookingWeb.Controllers
             {
                 try
                 {
-                    _context.Update(customer);
+                    var existingCustomer = await _context.Customers.FindAsync(id);
+                    if (existingCustomer == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Manually update the properties you want to change
+                    existingCustomer.FullName = customer.FullName;
+                    existingCustomer.IdentityNumber = customer.IdentityNumber;
+                    existingCustomer.RegistrationDate = customer.RegistrationDate;
+                    existingCustomer.Gender = customer.Gender;
+
+                    _context.Update(existingCustomer);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -109,6 +118,7 @@ namespace OnlineMovieTicketBookingWeb.Controllers
             }
             return View(customer);
         }
+
 
         private bool CustomerExists(string id)
         {
